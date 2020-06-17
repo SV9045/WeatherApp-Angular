@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "waether-app"
+    }
+  },
+  "defaultProject": "waether-app",
+  "cli": {
+    "analytics": "fe345f5a-a75c-4ef4-abce-7bfcbd79ef13"
+  }
 }
