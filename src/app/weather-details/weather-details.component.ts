@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { WeatherService } from 'src/app/weather.service';
 
 @Component({
   selector: 'app-weather-details',
@@ -8,15 +9,24 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class WeatherDetailsComponent implements OnInit {
   weatherForm: FormGroup;
-  constructor(private formbuilder: FormBuilder) { }
+  weatherData: any;
+
+  constructor(
+    private formbuilder: FormBuilder,
+    private weatherService: WeatherService
+  ) {}
 
   ngOnInit(): void {
     this.weatherForm = this.formbuilder.group({
-      locationInput : ['', [Validators.required]]
+      locationInput: ['', [Validators.required]]
     });
   }
 
   onSubmit(value) {
-    console.log(value);
+    this.weatherService.getWeather(value.locationInput).subscribe((data) => {
+      this.weatherData = data;
+      // console.log(this.weatherData);
+    });
+    this.weatherForm.reset();
   }
 }

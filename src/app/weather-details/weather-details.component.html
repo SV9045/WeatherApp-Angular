@@ -1,24 +1,65 @@
 <main class="container">
   <section class="weather-search">
     <h2>Enter Your Location:</h2>
-    <form class="weather-form"
-        [formGroup]="weatherForm"
-        (ngSubmit)="onSubmit(weatherForm.value)">
-    <input type="text"
-           name="weather-location"
-           placeholder="Enter Location"
-           aria-describedby="weather-Location"
-           formControlName="locationInput"/>
-    <br />
-    <button class="button" 
-            [disabled]="!weatherForm.valid" 
-            type="submit">
-      Search
-    </button>
-  </form>
+    <form
+      class="weather-form"
+      [formGroup]="weatherForm"
+      (ngSubmit)="onSubmit(weatherForm.value)"
+    >
+      <input
+        type="text"
+        name="weather-location"
+        placeholder="Enter Location"
+        aria-describedby="weather-Location"
+        formControlName="locationInput"
+      />
+      <br />
+      <button class="button" [disabled]="!weatherForm.valid" type="submit">
+        Search
+      </button>
+    </form>
   </section>
 
-  <section>
+  <section class="weather-details" *ngIf="weatherData">
     <h2>Weather Details:</h2>
+    <h5>
+      City: &nbsp;<span>{{ weatherData?.location.name }}</span>
+    </h5>
+    <h5>
+      Province: &nbsp;<span>{{ weatherData?.location.region }}</span>
+    </h5>
+    <h5>
+      Country: &nbsp;<span>{{ weatherData?.location.country }}</span>
+    </h5>
+    <h5>
+      Latitude: &nbsp;<span>{{ weatherData?.location.lat }}</span>
+    </h5>
+    <h5>
+      Longitude: &nbsp;<span>{{ weatherData?.location.lon }}</span>
+    </h5>
+    <h5>
+      Local date: &nbsp;<span>{{
+        weatherData?.location.localtime | date
+      }}</span>
+    </h5>
+    <h5>
+      Temperature(in degrees celcius): &nbsp;<span>{{
+        weatherData?.current.temperature
+      }}</span>
+    </h5>
+    <h5>
+      Feels Like(in degrees celcius): &nbsp;<span>{{
+        weatherData?.current.feelslike
+      }}</span>
+    </h5>
+    <h5>
+      Weather Description: &nbsp;<span>{{
+        weatherData?.current.weather_descriptions
+      }}</span>
+    </h5>
+    <h3>
+      All the Data Comes from
+      <span><a href="https://weatherstack.com/">Weather Stack</a>!</span>
+    </h3>
   </section>
 </main>
